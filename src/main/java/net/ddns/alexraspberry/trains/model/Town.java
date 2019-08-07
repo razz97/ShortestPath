@@ -2,24 +2,23 @@ package net.ddns.alexraspberry.trains.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Delegate;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter @Setter
 public class Town {
 	
-	@NonNull
+	@NonNull @EqualsAndHashCode.Include
 	private String name;
 	
-	@Delegate @EqualsAndHashCode.Exclude
+	@XmlTransient
 	private List<Road> roadsOut;
 	
 	public boolean isConnectedTo(Town town) {

@@ -10,7 +10,7 @@ public class Road {
 	private Town destination;
 	
 	public Road(int weight, Town origin, Town destination) {
-		origin.add(this);
+		origin.getRoadsOut().add(this);
 		this.weight = weight;
 		this.origin = origin;
 		this.destination = destination;

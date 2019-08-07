@@ -3,15 +3,14 @@ package net.ddns.alexraspberry.trains.config;
 import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.context.annotation.Configuration;
 
-import net.ddns.alexraspberry.trains.service.RouteService;
-import net.ddns.alexraspberry.trains.service.TownService;
+import net.ddns.alexraspberry.trains.beans.rest.RESTController;
 
-@ApplicationPath("/api")
+@Configuration
 public class JerseyConfig extends ResourceConfig {
 
 	public JerseyConfig() {
-		register(RouteService.class);
-		register(TownService.class);
+		register(RESTController.class);
 	}
 }
