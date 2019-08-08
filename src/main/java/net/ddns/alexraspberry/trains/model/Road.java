@@ -1,10 +1,13 @@
 package net.ddns.alexraspberry.trains.model;
 
 import lombok.Getter;
-import lombok.ToString;
 
+/**
+ * Represents a road, which essentially is an edge of a graph
+ * @author alex
+ *
+ */
 @Getter
-@ToString
 public class Road {
 
 	private int weight;
@@ -16,11 +19,6 @@ public class Road {
 		this.weight = weight;
 		this.origin = origin;
 		this.destination = destination;
-	}
-	
-	public boolean isDestination(Town town) {
-		return destination.equals(town);
-	}
-	
+	}	
 	
 }

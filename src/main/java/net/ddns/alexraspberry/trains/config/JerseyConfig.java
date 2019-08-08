@@ -1,16 +1,19 @@
 package net.ddns.alexraspberry.trains.config;
 
-import javax.ws.rs.ApplicationPath;
-
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
-import net.ddns.alexraspberry.trains.beans.rest.RESTController;
+import net.ddns.alexraspberry.trains.beans.rest.RESTControllerBean;
 
+/**
+ * Responsible for registering JAX-RS controllers
+ * @author alex
+ *
+ */
 @Configuration
 public class JerseyConfig extends ResourceConfig {
 
 	public JerseyConfig() {
-		register(RESTController.class);
+		register(RESTControllerBean.class);
 	}
 }
