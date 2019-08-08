@@ -1,6 +1,7 @@
 package net.ddns.alexraspberry.trains.test.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,10 +15,12 @@ public class RoadUnitTests {
 
 	@Test
 	public void constructorTest() {
-		Road road = new Road(5, new Town("A"), new Town("B"));
+		Town townA = new Town("A");
+		Road road = new Road(5, townA, new Town("B"));
+		assertNotNull(road);
 		assertEquals(5, road.getWeight());
-		assertEquals(new Town("A"), road.getOrigin());
+		assertEquals(townA, road.getOrigin());
 		assertEquals(new Town("B"), road.getDestination());
+		assertEquals(townA.getRoadsOut().get(0), road);
 	}
-	
 }

@@ -49,6 +49,9 @@ public class Result {
 	public Result(String errorMsg) {
 		this.error = true;
 		this.errorMsg = errorMsg;
+		this.success = false;
+		this.distance = 0;
+		this.route = new ArrayList<>();
 	}
 	
 }
