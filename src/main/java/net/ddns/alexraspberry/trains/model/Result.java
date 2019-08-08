@@ -8,8 +8,16 @@ import lombok.Getter;
 public class Result {
 
 	private boolean success;
-	private int distance;
-	private List<Road> roads;
+	private List<Route> routes;
 	
+	
+	public int getNumberOfRoutes() {
+		return routes.size();
+	}
+	
+	public Route getBestRoute() {
+		routes.sort(null);
+		return routes.get(0);
+	}
 	
 }

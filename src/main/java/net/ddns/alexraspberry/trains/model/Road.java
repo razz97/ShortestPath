@@ -1,8 +1,10 @@
 package net.ddns.alexraspberry.trains.model;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class Road {
 
 	private int weight;
@@ -19,4 +21,6 @@ public class Road {
 	public boolean isDestination(Town town) {
 		return destination.equals(town);
 	}
+	
+	
 }

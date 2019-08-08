@@ -10,8 +10,10 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import net.ddns.alexraspberry.trains.beans.QueryController;
 import net.ddns.alexraspberry.trains.model.Road;
 import net.ddns.alexraspberry.trains.model.Town;
 
@@ -24,12 +26,16 @@ public class Dao implements IDao {
 	private List<Town> towns;
 	private List<Road> roads;
 	
+	@Autowired
+	private QueryController controller;
+	
 	@PostConstruct
 	public void init() throws IOException {
 		towns = new ArrayList<>();
 		roads = new ArrayList<>();
 		assertFilesExist();
 		loadDataIntoMemory();
+		controller.resolveQuery(towns);
 	}
 	
 	@Override
@@ -76,7 +82,7 @@ public class Dao implements IDao {
 	}
 	
 	private Town getOrCreateTown(String name) {
-		Town tmpTown = new Town(name, new ArrayList<>());
+		Town tmpTown = new Town(name);
 		int index = towns.indexOf(tmpTown);
 		if (index == -1) {
 			towns.add(tmpTown);
