@@ -21,6 +21,7 @@ public class InvalidActionException extends Exception {
 	@AllArgsConstructor
 	public enum Cause {
 		TOWN_NOT_FOUND("Town name is invalid."),
+		INVALID_INPUT("The input provided is invalid."),
 		TOWNS_NOT_CONNECTED("Towns are not connected.");
 		
 		private String message;

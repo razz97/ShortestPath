@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import net.ddns.alexraspberry.trains.beans.QuerySolverBean;
 import net.ddns.alexraspberry.trains.exception.InvalidActionException;
+import net.ddns.alexraspberry.trains.exception.InvalidActionException.Cause;
 import net.ddns.alexraspberry.trains.model.Result;
 import net.ddns.alexraspberry.trains.model.Town;
 import net.ddns.alexraspberry.trains.persistance.IDao;
@@ -41,6 +42,8 @@ public class RESTControllerBean {
 		String[] townNames = query.split("-");
 		List<Town> towns = new ArrayList<>();
 		try {
+			if (townNames.length < 2)
+				throw new InvalidActionException(Cause.INVALID_INPUT);
 			for (String townName : townNames) 
 				towns.add(dao.getTown(townName));
 			return controller.resolveRoute(towns);
@@ -51,9 +54,11 @@ public class RESTControllerBean {
 	
 	@GET @Path("/shortest/{query}")
 	public Result getShortestPathResult(@PathParam("query") String query) {
-		log.info("Get request to /shortest/" + query);
+		log.info("Get request to /api/shortest/" + query);
 		String[] townNames = query.split("-");
 		try {
+			if (townNames.length < 2)
+				throw new InvalidActionException(Cause.INVALID_INPUT);
 			return controller.resolveShortestPath(dao.getTown(townNames[0]), dao.getTown(townNames[1]));
 		} catch (InvalidActionException e) {
 			return new Result(e.getMessage());
