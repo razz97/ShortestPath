@@ -37,15 +37,14 @@ public class QuerySolverBean {
 		int distance = 0;
 		// For each town except last...
 		for (int i = 0; i < route.size() - 1; i++) {
-			// Check if the next one is connected, if so add the distance of the road, else no such route exists
-			Town current = route.get(i);
-			Town next = route.get(i + 1);
-			if (!current.isConnectedTo(next)) {
+			// Add the distance of the road to the next town
+			try { 
+				distance += route.get(i).distanceTo(route.get(i + 1)); 
+			} catch (InvalidActionException e) {
+				// If the towns are not connected
 				log.info("Route resolved: failure");
 				return new Result(false);
 			}
-			try { distance += current.distanceTo(next); }
-			catch (InvalidActionException e) {/*This will never happen: we checked whether towns are connected*/}
 		}
 		log.info("Route resolved: success");
 		return new Result(true, distance, route);
